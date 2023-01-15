@@ -4,9 +4,25 @@ function NewTodo({ onAddTodo }) {
     const [description, setDescription] = useState("");
     
     function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
+
+        const todoObj = {
+          description: description,
+          completed: false
+        }
         
-        // persist todo on server
+        // persist todo to server
+        fetch("http://localhost:3000/todos",{
+          method: "POST",
+          headers: {
+             "Content-Type":"application/json"
+          },
+          body: JSON.stringify(todoObj)
+        }
+        )
+          .then(resp => resp.json())
+          .then(data => onAddTodo(data))
+        
         // then use onAddTodo to add todo to state
     }
   

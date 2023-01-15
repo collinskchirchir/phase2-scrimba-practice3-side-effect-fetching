@@ -24,6 +24,8 @@ function App() {
       setTodos(updatedTodos)
   }
   
+  console.log(todos)
+  
   function updateTodo(id, completed) {
       const updatedTodos = todos.map(todo => {
           if (todo.id === id) {
