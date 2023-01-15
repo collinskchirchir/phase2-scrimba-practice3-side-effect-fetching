@@ -10,7 +10,11 @@ function TodoItem({ todo, onUpdateTodo, onDeleteTodo }) {
     
     function handleDelete() {
         // persist changes on server
+        fetch(`http://localhost:3000/todos/${id}`, {
+          method: "DELETE"
+        })
         // then use onDeleteTodo to remove todo from state
+        // onDeleteTodo(id)
     }
     
     return (

@@ -23,7 +23,7 @@ function App() {
       const updatedTodos = todos.filter(todo => todo.id !== id)
       setTodos(updatedTodos)
   }
-  
+
   console.log(todos)
   
   function updateTodo(id, completed) {
@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <NewTodo onAddTodo={addTodo} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onDeleteTodo={deleteTodo} />
     </div>
   );
 }
