@@ -1,10 +1,24 @@
+// import React from "react"
 import React from "react"
 
 function TodoItem({ todo, onUpdateTodo, onDeleteTodo }) {
     const { description, id, completed } = todo
     
-    function handleCompleted(e) {
+    function handleCompleted(completed) {
         // persist changes on server
+        // prevent infinite re-rerender
+        
+          fetch(`http://localhost:3000/todos/${id}`, {
+            method: "PATCH",
+            header: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({completed: completed})
+
+          })
+            .then(resp => resp.json())
+            .then(data => onUpdateTodo(data.id, data.completed))
+       
         // then use onUpdateTodo to update todo in state
     }
     
@@ -14,7 +28,7 @@ function TodoItem({ todo, onUpdateTodo, onDeleteTodo }) {
           method: "DELETE"
         })
         // then use onDeleteTodo to remove todo from state
-        // onDeleteTodo(id)
+        onDeleteTodo(id)
     }
     
     return (
@@ -24,7 +38,7 @@ function TodoItem({ todo, onUpdateTodo, onDeleteTodo }) {
                 Completed?
                 <input
                     type="checkbox"
-                    onChange={handleCompleted}
+                    onChange={e => handleCompleted(e.target.checked)}
                     checked={completed}
                 />
             </label>

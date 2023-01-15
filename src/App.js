@@ -24,9 +24,10 @@ function App() {
       setTodos(updatedTodos)
   }
 
-  console.log(todos)
+  // console.log(todos)
   
   function updateTodo(id, completed) {
+      console.log(id, completed)
       const updatedTodos = todos.map(todo => {
           if (todo.id === id) {
               return { ...todo, completed }
@@ -34,11 +35,12 @@ function App() {
              return todo 
           }
       })
+      setTodos(updateTodo)
   }
   return (
     <div className="App">
       <NewTodo onAddTodo={addTodo} />
-      <TodoList todos={todos} onDeleteTodo={deleteTodo} />
+      <TodoList todos={todos} onDeleteTodo={deleteTodo} onUpdateTodo={updateTodo}/>
     </div>
   );
 }
